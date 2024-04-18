@@ -465,7 +465,6 @@ def train(train_data_dir, model_dir, **kwargs):
         
         # lrScheduler.step()
         lrScheduler.step(metrics=validLoss)
-        print('Validation loss: {}'.format(validLoss))
         
         if validLoss < bestValLoss:
             bestValLoss = validLoss
@@ -490,6 +489,8 @@ def train(train_data_dir, model_dir, **kwargs):
                 }, 'lastModel.pt')
                 print('Last model saved')
                 break
+        
+        print('Current Validation loss: {:.4f}, Best Validation loss: {:.4f}'.format(validLoss, bestValLoss))
         
         if correct/total*100 > bestValAcc:
             bestValAcc = correct/total*100
